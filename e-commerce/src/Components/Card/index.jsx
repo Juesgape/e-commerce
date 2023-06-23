@@ -2,11 +2,33 @@ import { React, useContext } from 'react'
 import { ShoppingCartContext } from '../../Context'
 
 const Card = ({id, title, price, category, description, image}) => {
-    const {count, setCount, openProductDetail, setProductInfo} = useContext(ShoppingCartContext)
 
+    //Getting context
+    const { count, 
+            setCount, 
+            openProductDetail, 
+            setProductInfo,
+            isProductDetailOpen,
+            orderList,
+            setOrderList
+        } = useContext(ShoppingCartContext)
+
+    //Show products based on the card info
     const showProduct = (cardInfo) => {
-        openProductDetail()
         setProductInfo(cardInfo)
+    }
+    //Open the aside element
+    const openProductInfo = () => {
+        openProductDetail()
+    }
+    //Setting orderList
+    const addProductsToCart = (cardInfo) => {
+        const newList = [...orderList, cardInfo]
+        setOrderList(newList)
+        
+        setTimeout(() => {
+            console.log(newList)
+        }, 1000)
     }
 
     return(
@@ -17,12 +39,23 @@ const Card = ({id, title, price, category, description, image}) => {
                     <figure className='relative w-60 mb-2 cursor-pointer'>
                         <span className="absolute bottom-0 left-0 bg-gray-400 rounded-lg text-black m-2 px-3 py-1 cursor-default">{category}</span>
                         <img 
-                        onClick={() => showProduct({'id': id, 'title': title, 'price': price, 'category': category, 'description': description, 'image': image})} 
+                        //Showing card information
+                        onClick={() => {
+                            if(isProductDetailOpen) {
+                                showProduct({'id': id, 'title': title, 'price': price, 'category': category, 'description': description, 'image': image})
+                            } else {
+                                openProductInfo()
+                                showProduct({'id': id, 'title': title, 'price': price, 'category': category, 'description': description, 'image': image})
+                            }
+                        }} 
                         className="w-full h-60 object-fit rounded-lg" src={image} alt={title} 
                         />
                         <button 
                         className="absolute top-0 right-0 flex justify-center bg-gray-400 w-7 h-7 rounded-full m-2 cursor-pointer"
-                        onClick={() => setCount(count + 1)}
+                        onClick={() => {
+                            setCount(count + 1)
+                            addProductsToCart({'id': id, 'title': title, 'price': price, 'category': category, 'description': description, 'image': image})
+                        }}
                         >
                             +
                         </button>

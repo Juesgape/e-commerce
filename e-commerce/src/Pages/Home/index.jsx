@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import Card from "../../Components/Card"
 import { ProductDetail } from "../../Components/ProductDetail"
+import { ShoppingCartContext } from "../../Context"
 
 const Home = () => {
     const [items, setItems] = useState(null)
@@ -18,9 +19,11 @@ const Home = () => {
         fetchData()
         },[])
 
+    const {isProductDetailOpen} = useContext(ShoppingCartContext)
+
     return(
         <div>
-            <div className="flex pt-[8rem] flex-wrap gap-8 w-full max-w-screen-lg justify-center">
+            <div className={`${isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                 {
                     items?.map((item) =>
                         <Card

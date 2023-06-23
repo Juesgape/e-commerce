@@ -1,29 +1,7 @@
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useContext } from 'react'
-import { ShoppingCartContext } from '../../Context'
-import './customScrollBar.css'
-
-const ProductDetail = () => {
-
-    const { isProductDetailOpen, 
-            openProductDetail, 
-            productInfo,
-            orderList,
-            setOrderList
-        } = useContext(ShoppingCartContext)
-
-    const addProductsToCart = (cardInfo) => {
-        const newList = [...orderList, cardInfo]
-        setOrderList(newList)
-        
-        setTimeout(() => {
-            console.log(newList)
-        }, 1000)
-    }
-
+const ProductsOrder = () => {
     return(
         <aside 
-        className={`${isProductDetailOpen ? 'flex': 'hidden'} flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 border border-black rounded-lg bg-white max-w-[370px] max-h-[98vh] w-[375px] p-4`}
+        className={`${isProductDetailOpen ? 'flex': 'hidden'} flex-col fixed right-0 z-20 top-[0rem] border border-black rounded-tl-lg bg-white max-w-[379px] h-[calc(100vh)] p-4`}
         
         >
             <div className="flex justify-between items-center">
@@ -39,7 +17,7 @@ const ProductDetail = () => {
             <div className='p-4 pt-8 overflow-y-scroll custom-scrollbar'>
                 <h3 className='text-center text-gray-500'>{productInfo.title}</h3>
                 <figure className='flex justify-center pt-8 pb-8'>
-                    <img className='w-[150px]' src={productInfo.image} alt="Product-image" />
+                    <img className='w-[200px]' src={productInfo.image} alt="Product-image" />
                 </figure>
                 <p className='text-justify'>{productInfo.description}</p>
                 <div className='w-full flex justify-between items-center pt-8'>
@@ -58,5 +36,5 @@ const ProductDetail = () => {
 }
 
 export {
-    ProductDetail
+    ProductsOrder
 }

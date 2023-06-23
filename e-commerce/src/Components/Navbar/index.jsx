@@ -5,10 +5,10 @@ import NavBarItem from "./NavBarItem/navBarItem"
 
 
 const Navbar = () => {
-    const {count, openProductDetail} = useContext(ShoppingCartContext)
+    const {count, isProductDetailOpen} = useContext(ShoppingCartContext)
 
     return(
-        <nav className='fixed top-0 right-0 flex justify-between bg-pink-300 items-center z-10 w-full py-10'>
+        <nav className={`${isProductDetailOpen ? 'pointer-events-none blur-sm' : 'blur-none'} fixed top-0 right-0 z-10 flex justify-between bg-pink-300 items-center w-full py-4`}>
             <ul className="flex items-center">
 
                 <li className="px-5 font-semibold text-lg">
@@ -69,7 +69,7 @@ const Navbar = () => {
                 </li>
                 <li className="px-5 flex items-center justify-evenly">
                     <ShoppingBagIcon onClick={() => {
-                        openProductDetail()
+                        return
                     }} 
                     className="w-6 h-6 cursor-pointer text-blue-400"/>{count}
                 </li>
