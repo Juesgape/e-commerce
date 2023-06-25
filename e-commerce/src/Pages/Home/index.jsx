@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react"
-import Card from "../../Components/Card"
+import { Card } from "../../Components/Card"
 import { ProductDetail } from "../../Components/ProductDetail"
+import { ProductsOrder } from "../../Components/ProductsOrder"
 import { ShoppingCartContext } from "../../Context"
 
 const Home = () => {
@@ -39,6 +40,7 @@ const Home = () => {
                 }
             </div>
             <ProductDetail/>
+            <ProductsOrder/>
         </div>
     )
 }

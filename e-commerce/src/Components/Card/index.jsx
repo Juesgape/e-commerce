@@ -1,5 +1,6 @@
-import { React, useContext } from 'react'
+import { React, useContext, useState } from 'react'
 import { ShoppingCartContext } from '../../Context'
+import { CheckCircleIcon } from '@heroicons/react/24/solid'
 
 const Card = ({id, title, price, category, description, image}) => {
 
@@ -10,7 +11,7 @@ const Card = ({id, title, price, category, description, image}) => {
             setProductInfo,
             isProductDetailOpen,
             orderList,
-            setOrderList
+            setOrderList,
         } = useContext(ShoppingCartContext)
 
     //Show products based on the card info
@@ -25,10 +26,22 @@ const Card = ({id, title, price, category, description, image}) => {
     const addProductsToCart = (cardInfo) => {
         const newList = [...orderList, cardInfo]
         setOrderList(newList)
+    }
+
+    const removeProductFromCart = (id) => {
+        //remove product based on id
+        const newList = orderList.filter(elem => elem.id !== id)
+        setOrderList(newList)
+    }
+
+    const isCardInOrderList = (id) => {
+        const elementFound = orderList.filter(card => card.id === id)
         
-        setTimeout(() => {
-            console.log(newList)
-        }, 1000)
+        if(elementFound.length === 0) {
+            return false
+        } else {
+            return true
+        }
     }
 
     return(
@@ -50,8 +63,8 @@ const Card = ({id, title, price, category, description, image}) => {
                         }} 
                         className="w-full h-60 object-fit rounded-lg" src={image} alt={title} 
                         />
-                        <button 
-                        className="absolute top-0 right-0 flex justify-center bg-gray-400 w-7 h-7 rounded-full m-2 cursor-pointer"
+                        <button
+                        className={`${isCardInOrderList(id) ? 'hidden' : 'flex'} absolute top-0 right-0 justify-center bg-gray-400 w-7 h-7 rounded-full m-2 cursor-pointer`}
                         onClick={() => {
                             setCount(count + 1)
                             addProductsToCart({'id': id, 'title': title, 'price': price, 'category': category, 'description': description, 'image': image})
@@ -59,6 +72,16 @@ const Card = ({id, title, price, category, description, image}) => {
                         >
                             +
                         </button>
+
+                        <CheckCircleIcon
+                        className={`${isCardInOrderList(id) ? 'flex' : 'hidden'} absolute top-0 right-0 justify-center bg-black text-blue-400 w-7 h-7 rounded-full m-2 cursor-pointer`}
+                        onClick={() => {
+                            setCount(count - 1)
+                            removeProductFromCart(id)
+                        }}
+                        >
+                        </CheckCircleIcon>
+                        
                     </figure>
                 </div>
 
@@ -74,4 +97,6 @@ const Card = ({id, title, price, category, description, image}) => {
     )
 }
 
-export default Card
+export { 
+    Card,
+}

@@ -8,12 +8,14 @@ import NotFound from '../NotFound/index.jsx'
 import SignIn from '../SignIn/index.jsx'
 import Navbar from '../../Components/Navbar/index.jsx'
 import Layout from '../../Components/Layout/index.jsx'
+import { ProductsOrder } from '../../Components/ProductsOrder'
 import './App.css'
 
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/', element: <Home/> },
     { path: '/my-orders', element: <MyOrders/> },
+    { path: '/my-orders/last', element: <MyOrder/> },
     { path: '/my-account', element: <MyAccount/> },
     { path: '/my-order', element: <MyOrder/>},
     { path: '/sign-in', element: <SignIn/>},

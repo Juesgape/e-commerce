@@ -9,16 +9,14 @@ const ProductDetail = () => {
             openProductDetail, 
             productInfo,
             orderList,
-            setOrderList
+            setOrderList,
+            setCount,
+            count
         } = useContext(ShoppingCartContext)
 
     const addProductsToCart = (cardInfo) => {
         const newList = [...orderList, cardInfo]
         setOrderList(newList)
-        
-        setTimeout(() => {
-            console.log(newList)
-        }, 1000)
     }
 
     return(
@@ -45,7 +43,10 @@ const ProductDetail = () => {
                 <div className='w-full flex justify-between items-center pt-8'>
                     <button 
                     className='bg-blue-400 p-3 rounded-lg text-white hover:text-black'
-                    onClick={() => addProductsToCart(productInfo)}
+                    onClick={() => {
+                        addProductsToCart(productInfo)
+                        setCount(count + 1)
+                    }}
                     >Add product
                     </button>
                     
