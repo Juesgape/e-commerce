@@ -1,18 +1,35 @@
-import { useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Card } from "../../Components/Card"
 import { ProductDetail } from "../../Components/ProductDetail"
 import { ProductsOrder } from "../../Components/ProductsOrder"
 import { ShoppingCartContext } from "../../Context"
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 
-const Home = () => {
+const ProductsByCategory = ({pathName}) => {
 
-    const { isProductDetailOpen,
-            items, 
-            searchByTitle,
-            setSearchByTitle,
-            filteredItems
-        } = useContext(ShoppingCartContext)
+    const context = useContext(ShoppingCartContext)
+
+    // Get Products
+    const [items, setItems] = useState(null)
+    const [filteredItems, setFilteredItems] = useState(null)
+    // Search for products by title
+    const [searchByTitle, setSearchByTitle] = useState(null)
+
+    //setting items in base by category
+    useEffect(() => {
+        const categoryItems = context.items?.filter((elem) => elem.category === pathName)
+        setItems(categoryItems)
+    },[pathName])
+
+
+    const filteredItemsByTitle = (items, searchByTitle) => {
+        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+
+    useEffect(() => {
+        if(searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
+
+    },[items, searchByTitle])
 
     const renderView = () => {
 
@@ -24,7 +41,7 @@ const Home = () => {
             )
         } else if(searchByTitle?.length > 0) {
             return (
-                <div className={`${isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
+                <div className={`${context.isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                     {
                         filteredItems?.map((item) =>
                             <Card
@@ -42,7 +59,7 @@ const Home = () => {
             )
         } else {
             return(
-                <div className={`${isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
+                <div className={`${context.isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                     {
                         items?.map((item) =>
                             <Card
@@ -88,4 +105,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default ProductsByCategory

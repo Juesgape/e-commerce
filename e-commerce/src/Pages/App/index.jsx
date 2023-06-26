@@ -8,7 +8,7 @@ import NotFound from '../NotFound/index.jsx'
 import SignIn from '../SignIn/index.jsx'
 import Navbar from '../../Components/Navbar/index.jsx'
 import Layout from '../../Components/Layout/index.jsx'
-import { ProductsOrder } from '../../Components/ProductsOrder'
+import ProductsByCategory from '../../Components/ProductsByCategory'
 import './App.css'
 
 const AppRoutes = () => {
@@ -20,6 +20,10 @@ const AppRoutes = () => {
     { path: '/my-account', element: <MyAccount/> },
     { path: '/my-order', element: <MyOrder/>},
     { path: '/sign-in', element: <SignIn/>},
+    { path: '/jewelery', element: <ProductsByCategory pathName={'jewelery'} />},
+    { path: '/electronics', element: <ProductsByCategory pathName={'electronics'} />},
+    { path: "/women's-clothing", element: <ProductsByCategory pathName={"women's clothing"} />},
+    { path: "/men's-clothing", element: <ProductsByCategory pathName={"men's clothing"} />},
     { path: '/*', element: <NotFound/>}
   ])
 
