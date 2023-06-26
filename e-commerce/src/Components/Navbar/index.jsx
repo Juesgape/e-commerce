@@ -14,10 +14,8 @@ const Navbar = () => {
         <nav className={`${isProductDetailOpen ? 'pointer-events-none blur-sm' : 'blur-none'} fixed top-0 right-0 z-10 flex justify-between bg-pink-300 items-center w-full py-4`}>
             <ul className="flex items-center">
 
-                <li className="px-5 font-semibold text-lg">
-                    <NavBarItem to='/'>
-                        Shopi
-                    </NavBarItem>
+                <li className="px-5 font-semibold text-2xl cursor-default">
+                        Shopify
                 </li>
                 <li className="px-5">
                     <NavBarItem to='/'>
