@@ -11,7 +11,8 @@ const Home = () => {
             items, 
             searchByTitle,
             setSearchByTitle,
-            filteredItems
+            filteredItems,
+            isCartOpen
         } = useContext(ShoppingCartContext)
 
     const renderView = () => {
@@ -24,7 +25,7 @@ const Home = () => {
             )
         } else if(searchByTitle?.length > 0) {
             return (
-                <div className={`${isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
+                <div className={`${isProductDetailOpen || isCartOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                     {
                         filteredItems?.map((item) =>
                             <Card
@@ -42,7 +43,7 @@ const Home = () => {
             )
         } else {
             return(
-                <div className={`${isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
+                <div className={`${isProductDetailOpen || isCartOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                     {
                         items?.map((item) =>
                             <Card
@@ -64,20 +65,22 @@ const Home = () => {
     return(
         <div>
 
-            <div className="w-full flex justify-center pb-8">
+            <div className={'w-full flex justify-center pb-8'}>
                 <div className="w-80 relative">
                     <input 
                         type="text" 
-                        placeholder="what are you looking for" 
-                        className="rounded-lg border border-black w-80 p-2 focus:border-blue-400 outline-none pr-10"
+                        placeholder="Search for a product..." 
+                        className={`${isProductDetailOpen || isCartOpen ? 'blur-sm pointer-events-none' : 'blur-none pointer-events-auto'} rounded-lg border border-black w-80 p-2 focus:border-blue-400 outline-none pr-10`}
                         onChange={(event) => setSearchByTitle(event.target.value)}
                     />
-                    <MagnifyingGlassIcon className="w-6 h-6 absolute right-2 bottom-2" />
+                    <MagnifyingGlassIcon className={`${isProductDetailOpen || isCartOpen ? 'blur-sm ' : 'blur-none pointer-events-auto'} w-6 h-6 absolute right-2 bottom-2`} />
                 </div>
             </div>
 
-            <div className="flex justify-center w-80 items-center relative pb-2">
-                <h1>Home</h1>
+            <div className={`flex justify-start w-full items-center pb-[2rem]`}>
+                <div className="w-full pl-[7rem]">
+                    <h1 className={`${isProductDetailOpen || isCartOpen ? 'blur-sm ' : 'blur-none'} font-bold text-2xl`}>HOME</h1>
+                </div>
             </div>
 
             {renderView()}

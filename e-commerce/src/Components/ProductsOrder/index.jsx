@@ -14,7 +14,7 @@ const ProductsOrder = () => {
             count,
             setCount,
             order,
-            setOrder
+            setOrder,
     } = useContext(ShoppingCartContext)
 
     const removeProductFromCart = (id) => {
@@ -35,11 +35,12 @@ const ProductsOrder = () => {
         setOrderList([])
         //resetting quantity in cart
         setCount(count - orderList.length)
+        openCart()
     }
 
     return(
         <aside 
-        className={`${isCartOpen ? 'flex': 'hidden'} flex-col fixed right-0 z-20 top-[0] border border-black rounded-tl-lg bg-white max-w-[375px] h-[100vh] p-4 overflow-y-auto overflow-x-hidden custom-scrollbar`}
+        className={`${isCartOpen ? 'flex': 'hidden'} flex-col fixed right-0 z-20 top-[0rem] border border-black rounded-tl-lg bg-white max-w-[375px] h-[100vh] p-4 overflow-y-auto overflow-x-hidden custom-scrollbar`}
         >
 
             <div className="flex justify-between items-center pb-4">
@@ -75,11 +76,8 @@ const ProductsOrder = () => {
                     }}
                     >Remove
                 </button>
-
                 </div>
-
             </div>
-
             )
 
             :
@@ -93,21 +91,28 @@ const ProductsOrder = () => {
 
             }
 
-            
-            <div className="p-6 flex justify-between items-center">
-                <span className="font-light text-2xl">Total:</span>
-                <span className="font-medium text-2xl">${totalPrice(orderList)}</span>
+            {
+                orderList.length > 0 
+                ?
+                <div>
+                    <div className="p-6 flex justify-between items-center">
+                        <span className="font-light text-2xl">Total:</span>
+                        <span className="font-medium text-2xl">${totalPrice(orderList)}</span>
+                    </div>
+                
+                    <Link to='/my-orders/last'>
+                        <button
+                        className="w-full bg-blue-400 text-white p-3 hover:text-black rounded-lg"
+                        onClick={() => {
+                            handleCheckOut()
+                        }}
+                        >Checkout
+                        </button>
+                    </Link>
             </div>
-
-            <Link to='/my-orders/last'>
-                <button
-                className="w-full bg-blue-400 text-white p-3 hover:text-black rounded-lg"
-                onClick={() => {
-                    handleCheckOut()
-                }}
-                >Checkout
-                </button>
-            </Link>
+                :
+                    ''
+            }
 
         </aside>
     )

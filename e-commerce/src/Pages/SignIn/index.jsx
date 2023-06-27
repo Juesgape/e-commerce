@@ -2,8 +2,8 @@ import React from "react";
 
 function SignIn() {
     return(
-        <div className="bg-pink-800">
-            Sign in bitch
+        <div>
+            <h1 className='font-bold text-2xl'>Sign in</h1>
         </div>
     )
 }

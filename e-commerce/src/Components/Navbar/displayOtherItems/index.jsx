@@ -26,7 +26,11 @@ const DisplayItems = ({name, items}) => {
                                     to={'/' + item.split(' ').join('-').toLowerCase()}
 
                                 >
-                                    <li className="mb-2 cursor-pointer" key={index}>
+                                    <li 
+                                        className="mb-2 cursor-pointer" 
+                                        key={index}
+                                        onClick={() => setToggleItemMenu(!toggleItemMenu)}
+                                    >
                                         {item}
                                     </li>
                                 </NavBarItem>

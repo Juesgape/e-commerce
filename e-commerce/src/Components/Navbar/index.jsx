@@ -8,7 +8,8 @@ import { DisplayItems } from "./displayOtherItems"
 const Navbar = () => {
     const { count, 
             isProductDetailOpen,
-            openCart
+            openCart,
+            isCartOpen
     } = useContext(ShoppingCartContext)
 
     const [displayMenu, setDisplayMenu] = useState(false)
@@ -22,7 +23,7 @@ const Navbar = () => {
     return(
         isMobile === false
         ?
-            <nav className={`${isProductDetailOpen ? 'pointer-events-none blur-sm' : 'blur-none'} fixed top-0 right-0 z-10 flex justify-between items-center w-full py-4 bg-white border-b shadow ring ring-blue-500 ring-opacity-50`}>
+            <nav className={`${isProductDetailOpen || isCartOpen ? 'pointer-events-none blur-sm' : 'blur-none'} fixed top-0 right-0 z-10 flex justify-between items-center w-full py-4 bg-white border-b shadow ring ring-blue-500 ring-opacity-50`}>
             <ul className="flex items-center">
 
                 <li className="px-5 font-semibold text-2xl cursor-default">
@@ -54,9 +55,11 @@ const Navbar = () => {
             </ul>
 
             <ul className="flex items-center">
-                <li className="px-5 text-gray-500">
-                    Juesgape
-                </li>
+                <a href="https://github.com/Juesgape" target="blank">
+                    <li className="px-5 text-blue-800 cursor-pointer">
+                        @Juesgape
+                    </li>
+                </a>
                 <li className="px-5">
                     <NavBarItem to='/my-orders'>
                         My Orders
@@ -67,10 +70,8 @@ const Navbar = () => {
                         My Account
                     </NavBarItem>
                 </li>
-                <li className="px-5">
-                    <NavBarItem to='/sign-in'>
+                <li className="px-5 cursor-pointer">
                         Sign In
-                    </NavBarItem>
                 </li>
                 <li className="px-5 flex items-center justify-evenly">
                     <ShoppingBagIcon onClick={() => {
@@ -116,55 +117,95 @@ const Navbar = () => {
                                 </div>
 
                                 <ul className="p-2 w-full flex flex-col justify-center items-center">
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to='/'>
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}>
+                                        <NavBarItem 
+                                            to='/'
+                                        >
                                             Home
                                         </NavBarItem>
                                     </li>
 
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to="/women's-clothing">
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
+                                        <NavBarItem 
+                                            to="/women's-clothing"
+                                            >
                                             Women's clothing
                                         </NavBarItem>
                                     </li>
 
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to="/men's-clothing">
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
+                                        <NavBarItem 
+                                            to="/men's-clothing"
+                                            >
                                             Men's clothing
                                         </NavBarItem>
                                     </li>
 
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to='/electronics'>
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
+                                        <NavBarItem 
+                                            to='/electronics'
+                                            onClick={() => setDisplayMenu(!displayMenu)}
+                                            >
                                             Electronics
                                         </NavBarItem>
                                     </li>
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to='/jewelery'>
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
+                                        <NavBarItem 
+                                            to='/jewelery'
+                                            onClick={() => setDisplayMenu(!displayMenu)}
+                                            >
                                             Jewelery
                                         </NavBarItem>
                                     </li>
                                 </ul>
                         
                                 <ul className="p-2 pt-[10rem] w-full flex flex-col justify-center items-center">
-                                    <li className="px-5 py-2">
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
                                         <NavBarItem to='/my-orders'>
                                             My Orders
                                         </NavBarItem>
                                     </li>
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to='/my-account'>
+                                    
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
+                                        <NavBarItem 
+                                            to='/my-account'>
                                             My Account
                                         </NavBarItem>
                                     </li>
-                                    <li className="px-5 py-2">
-                                        <NavBarItem to='/sign-in'>
+                                    <li 
+                                        className="px-5 py-2"
+                                        onClick={() => setDisplayMenu(!displayMenu)}
+                                        >
+                                        <NavBarItem 
+                                            to='/sign-in'>
                                             Sign In
                                         </NavBarItem>
                                     </li>
-                                    <li className="px-5 py-2 text-gray-500">
-                                        Juesgape
-                                    </li>
+                                    <a href="https://github.com/Juesgape" target="blank">
+                                        <li className="px-5 text-blue-800 cursor-pointer">
+                                            @Juesgape
+                                        </li>
+                                    </a>
                                 </ul>
                             </div>
                         :
@@ -177,49 +218,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-
-                    {/* <li className="px-5">
-                        <NavBarItem to='/'>
-                            All
-                        </NavBarItem>
-                    </li>
-                        
-                    <DisplayItems
-                        name={'Clothes'}
-                        items={["Women's clothing", "Men's clothing"]}
-                    >
-                    
-                    </DisplayItems>
-                        
-                    <li className="px-5">
-                        <NavBarItem to='/electronics'>
-                            Electronics
-                        </NavBarItem>
-                    </li>
-                    <li className="px-5">
-                        <NavBarItem to='/furnitures'>
-                            Jewelery
-                        </NavBarItem>
-                    </li>
-                </ul>
-                        
-                <ul className="flex items-center">
-                    <li className="px-5 text-gray-500">
-                        Juesgape
-                    </li>
-                    <li className="px-5">
-                        <NavBarItem to='/my-orders'>
-                            My Orders
-                        </NavBarItem>
-                    </li>
-                    <li className="px-5">
-                        <NavBarItem to='/my-account'>
-                            My Account
-                        </NavBarItem>
-                    </li>
-                    <li className="px-5">
-                        <NavBarItem to='/sign-in'>
-                            Sign In
-                        </NavBarItem>
-                    </li> */}

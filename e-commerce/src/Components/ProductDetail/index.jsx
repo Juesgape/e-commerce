@@ -1,5 +1,5 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ShoppingCartContext } from '../../Context'
 import './customScrollBar.css'
 
@@ -11,13 +11,17 @@ const ProductDetail = () => {
             orderList,
             setOrderList,
             setCount,
-            count
+            count,
         } = useContext(ShoppingCartContext)
 
     const addProductsToCart = (cardInfo) => {
         const newList = [...orderList, cardInfo]
         setOrderList(newList)
     }
+
+
+    const isProductAdded = orderList.some((element) => element.id === productInfo.id);
+
 
     return(
         <aside 
@@ -40,16 +44,31 @@ const ProductDetail = () => {
                     <img className='w-[150px]' src={productInfo.image} alt="Product-image" />
                 </figure>
                 <p className='text-justify'>{productInfo.description}</p>
-                <div className='w-full flex justify-between items-center pt-8'>
-                    <button 
-                    className='bg-blue-400 p-3 rounded-lg text-white hover:text-black'
-                    onClick={() => {
-                        addProductsToCart(productInfo)
-                        setCount(count + 1)
-                    }}
-                    >Add product
-                    </button>
-                    
+                
+                <div 
+                    key={productInfo.id}
+                    className='w-full flex justify-between items-center pt-8'
+                >
+
+                    {
+                        !isProductAdded ? ( 
+                            <button 
+                                className={`bg-blue-400 p-3 rounded-lg text-white hover:text-black`}
+                                onClick={() => {
+                                    addProductsToCart(productInfo)
+                                    setCount(count + 1)
+                                }}
+                                >
+                                Add product
+                            </button>
+                        )
+                        : (
+                            <button
+                                className='bg-green-400 p-3 rounded-lg text-white hover:text-black'
+                            >
+                                Added succesfully!
+                            </button>
+                    )}                    
                     <p className='font-bold text-[1.3rem]'>${productInfo.price}</p>
                 </div>
             </div>

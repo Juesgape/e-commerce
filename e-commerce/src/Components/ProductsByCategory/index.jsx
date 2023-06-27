@@ -82,19 +82,21 @@ const ProductsByCategory = ({pathName}) => {
         <div>
 
             <div className="w-full flex justify-center pb-8">
-                <div className="w-80 relative">
+            <div className="w-80 relative">
                     <input 
                         type="text" 
-                        placeholder="what are you looking for" 
-                        className="rounded-lg border border-black w-80 p-2 focus:border-blue-400 outline-none pr-10"
+                        placeholder="Search for a product..." 
+                        className={`${context.isProductDetailOpen ? 'blur-sm pointer-events-none' : 'blur-none pointer-events-auto'} rounded-lg border border-black w-80 p-2 focus:border-blue-400 outline-none pr-10`}
                         onChange={(event) => setSearchByTitle(event.target.value)}
                     />
-                    <MagnifyingGlassIcon className="w-6 h-6 absolute right-2 bottom-2" />
+                    <MagnifyingGlassIcon className={`${context.isProductDetailOpen ? 'blur-sm ' : 'blur-none pointer-events-auto'} w-6 h-6 absolute right-2 bottom-2`} />
                 </div>
             </div>
 
-            <div className="flex justify-center w-80 items-center relative pb-2">
-                <h1>Home</h1>
+            <div className={`flex justify-start w-full items-center pb-[2rem]`}>
+                <div className="w-full pl-[2rem]">
+                    <h1 className={`${context.isProductDetailOpen ? 'blur-sm ' : 'blur-none'} font-bold text-2xl`}>{pathName.toUpperCase()}</h1>
+                </div>
             </div>
 
             {renderView()}
