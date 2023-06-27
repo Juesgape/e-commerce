@@ -41,7 +41,7 @@ const ProductsByCategory = ({pathName}) => {
             )
         } else if(searchByTitle?.length > 0) {
             return (
-                <div className={`${context.isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
+                <div className={`${context.isProductDetailOpen || context.isCartOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                     {
                         filteredItems?.map((item) =>
                             <Card
@@ -59,7 +59,7 @@ const ProductsByCategory = ({pathName}) => {
             )
         } else {
             return(
-                <div className={`${context.isProductDetailOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
+                <div className={`${context.isProductDetailOpen || context.isCartOpen ? 'blur-sm pointer-events-none overflow-hidden' : 'blur-none pointer-events-auto' } flex flex-wrap gap-8 w-full max-w-screen-lg justify-center`}>
                     {
                         items?.map((item) =>
                             <Card
@@ -86,16 +86,16 @@ const ProductsByCategory = ({pathName}) => {
                     <input 
                         type="text" 
                         placeholder="Search for a product..." 
-                        className={`${context.isProductDetailOpen ? 'blur-sm pointer-events-none' : 'blur-none pointer-events-auto'} rounded-lg border border-black w-80 p-2 focus:border-blue-400 outline-none pr-10`}
+                        className={`${context.isProductDetailOpen || context.isCartOpen ? 'blur-sm pointer-events-none' : 'blur-none pointer-events-auto'} rounded-lg border border-black w-80 p-2 focus:border-blue-400 outline-none pr-10`}
                         onChange={(event) => setSearchByTitle(event.target.value)}
                     />
-                    <MagnifyingGlassIcon className={`${context.isProductDetailOpen ? 'blur-sm ' : 'blur-none pointer-events-auto'} w-6 h-6 absolute right-2 bottom-2`} />
+                    <MagnifyingGlassIcon className={`${context.isProductDetailOpen || context.isCartOpen ? 'blur-sm ' : 'blur-none pointer-events-auto'} w-6 h-6 absolute right-2 bottom-2`} />
                 </div>
             </div>
 
             <div className={`flex justify-start w-full items-center pb-[2rem]`}>
                 <div className="w-full pl-[2rem]">
-                    <h1 className={`${context.isProductDetailOpen ? 'blur-sm ' : 'blur-none'} font-bold text-2xl`}>{pathName.toUpperCase()}</h1>
+                    <h1 className={`${context.isProductDetailOpen || context.isCartOpen ? 'blur-sm ' : 'blur-none'} font-bold text-2xl`}>{pathName.toUpperCase()}</h1>
                 </div>
             </div>
 

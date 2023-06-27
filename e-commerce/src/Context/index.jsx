@@ -71,7 +71,7 @@ const ShoppingCartProvider = ({children}) => {
             setItems,
             searchByTitle,
             setSearchByTitle,
-            filteredItems
+            filteredItems,
         }}>
             {children}
         </ShoppingCartContext.Provider>

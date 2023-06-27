@@ -12,7 +12,7 @@ const Home = () => {
             searchByTitle,
             setSearchByTitle,
             filteredItems,
-            isCartOpen
+            isCartOpen,
         } = useContext(ShoppingCartContext)
 
     const renderView = () => {

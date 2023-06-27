@@ -194,12 +194,8 @@ const Navbar = () => {
                                     </li>
                                     <li 
                                         className="px-5 py-2"
-                                        onClick={() => setDisplayMenu(!displayMenu)}
                                         >
-                                        <NavBarItem 
-                                            to='/sign-in'>
                                             Sign In
-                                        </NavBarItem>
                                     </li>
                                     <a href="https://github.com/Juesgape" target="blank">
                                         <li className="px-5 text-blue-800 cursor-pointer">

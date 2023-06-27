@@ -3,6 +3,7 @@ import { ShoppingCartContext } from "../../Context";
 import { Link } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { totalPrice } from "../../Utils";
+import { ProductsOrder } from "../../Components/ProductsOrder";
 
 function MyOrder() {
     const {order} = useContext(ShoppingCartContext)
@@ -53,6 +54,8 @@ function MyOrder() {
 
             <p>There's nothing in your order</p>
             }
+
+            <ProductsOrder />
         </div>
         
     )

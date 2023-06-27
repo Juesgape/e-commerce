@@ -1,5 +1,6 @@
 import React from "react";
 import youCatPhoto from '../../assets/cat-you.jpg'
+import { ProductsOrder } from "../../Components/ProductsOrder";
 
 function MyAccount() {
     return(
@@ -20,7 +21,9 @@ function MyAccount() {
                     </div>
                 </div>
             </div>
-        </div>  
+
+            <ProductsOrder/>
+        </div>
     )
 }
 

@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { OrdersCard } from "../../Components/OrdersCard";
 import { ShoppingCartContext } from "../../Context";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { ProductsOrder } from "../../Components/ProductsOrder";
 
 function MyOrders() {
     const { order,
@@ -10,8 +12,12 @@ function MyOrders() {
     return(
         <div>
             <div className="flex justify-center w-80 items-center relative mb-6">
-                <h1 className='font-bold text-2xl'>My orders</h1>
+                <Link to='/' className="absolute left-0">
+                    <ChevronLeftIcon className="h-8 w-8 text-black cursor-pointer"/>
+                </Link>
+                <h1 className="font-bold text-2xl">My orders</h1>
             </div>
+
             {
                 order.length > 0 
                 ?
@@ -28,6 +34,8 @@ function MyOrders() {
                     <p className="text-lg mb-4 ">You haven't ordered anything... Yet :)</p>
                 </div>
             }
+
+            <ProductsOrder />
         </div>
     )
 }
